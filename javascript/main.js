@@ -71,7 +71,7 @@
 //   console.log(`${propertie}: ${object[propertie]}`);
 //}
 //
-let json = '{"name": "Alice"}';
+/* let json = '{"name": "Alice"}';
 try {
   let user = JSON.parse(json);
   if (!user.age) throw new SyntaxError("Incomplete data: no age");
@@ -80,3 +80,55 @@ try {
 } catch (e) {
   console.log("JSON error: " + e);
 }
+ *//* 
+
+const cars = ["BWM", "TOYOTA", "HONDA"];
+console.log(cars.map((car) => car.length));
+let a = 100;
+console.log(function(a) {
+  return a + 100;
+});
+console.log((a) => a + 100);
+console.log(a => a + 100);
+// Traditional Function
+function bob(a) {
+  return a + 100;
+}
+
+// Arrow Function
+const bob2 = (a) => a + 100; */
+
+// ( myfucntion = (age =10) => {
+//   console.log("My age is john " + "age: " + age);
+// })();
+
+// console.log(myfucntion(19));
+
+
+// function myFunction(...Arr) { // Rest parameter
+//   let total =0;
+//   for (const arr of Arr){
+//       total += arr;
+//   }
+//   return total;
+// }
+
+// console.log(myFunction(1,2,3,4,5));
+
+// let a =1;
+// {
+//   let a =10;
+//   console.log(a);
+// }
+// console.log(a);\
+
+function myName(){
+  return console.log("My name is panha. ");
+}
+
+function myNickname() {
+  myName();
+}
+
+myName();
+myNickname();
