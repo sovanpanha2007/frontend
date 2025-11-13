@@ -1,0 +1,263 @@
+/* --- Variables and Resets --- */
+:root {
+    --bg-light: #f4f7f6;
+    --bg-dark: #2c3e50; /* Main dark color */
+    --sidebar-color: #34495e;
+    --card-bg: #ffffff;
+    --text-dark: #333;
+    --text-light: #ecf0f1;
+    --primary-color: #3498db; /* Blue */
+    --gap-size: 20px;
+
+    /* Theme Colors for Cards */
+    --primary-bg: #3498db;
+    --success-bg: #2ecc71;
+    --warning-bg: #f1c40f;
+    --danger-bg: #e74c3c;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+}
+
+/* --- Dashboard Container (Main Grid) --- */
+.dashboard-container {
+    display: grid;
+    /* Desktop: Fixed sidebar (250px) + Main Content (1fr) */
+    grid-template-columns: 250px 1fr;
+    min-height: 100vh;
+}
+
+
+/* --- Sidebar --- */
+.sidebar {
+    background-color: var(--sidebar-color);
+    color: var(--text-light);
+    padding: var(--gap-size) 0;
+}
+
+.logo {
+    font-size: 1.4em;
+    font-weight: bold;
+    text-align: center;
+    padding: 0 var(--gap-size) var(--gap-size);
+    border-bottom: 1px solid #4a627c;
+    margin-bottom: var(--gap-size);
+}
+
+.sidebar-nav ul li a {
+    display: flex;
+    align-items: center;
+    padding: 12px var(--gap-size);
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.sidebar-nav ul li a:hover,
+.sidebar-nav ul li.active a {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+}
+
+.sidebar-nav ul li a i {
+    margin-right: 10px;
+}
+
+
+/* --- Main Content --- */
+.main-content {
+    padding: var(--gap-size);
+}
+
+/* Header */
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 15px;
+    margin-bottom: var(--gap-size);
+    border-bottom: 1px solid #ddd;
+}
+
+.main-header h2 {
+    font-size: 1.8em;
+    color: var(--text-dark);
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.user-info .fa-bell {
+    font-size: 1.2em;
+    color: var(--primary-color);
+}
+
+
+/* Content Grid */
+.content-grid {
+    display: grid;
+    /* Main layout: 4 summary cards (equal width) on top, followed by larger items */
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--gap-size);
+}
+
+
+/* Card Styles */
+.card {
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    padding: var(--gap-size);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Summary Card */
+.summary-card {
+    text-align: center;
+    color: var(--text-light);
+}
+
+.summary-card i {
+    font-size: 2em;
+    margin-bottom: 10px;
+    opacity: 0.8;
+}
+
+.summary-card h4 {
+    font-size: 1em;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    opacity: 0.9;
+}
+
+.summary-card p {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.primary-bg { background-color: var(--primary-bg); }
+.success-bg { background-color: var(--success-bg); }
+.warning-bg { background-color: var(--warning-bg); }
+.danger-bg { background-color: var(--danger-bg); }
+
+
+/* Full Width Card (Chart) */
+.full-width {
+    grid-column: 1 / -1; /* Makes the card span all available columns (4) */
+}
+
+.chart-card {
+    height: 300px; /* Example fixed height */
+}
+
+.chart-placeholder {
+    height: 200px;
+    background-color: #f0f0f0;
+    margin-top: 15px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #999;
+}
+
+
+/* Activity Card */
+.activity-card h4 {
+    margin-bottom: 15px;
+    color: var(--primary-color);
+}
+
+.activity-card ul li {
+    padding: 8px 0;
+    border-bottom: 1px dashed #eee;
+    font-size: 0.9em;
+}
+
+.activity-card ul li:last-child {
+    border-bottom: none;
+}
+
+.activity-card ul li i {
+    margin-right: 8px;
+    color: var(--success-bg);
+}
+
+/* --------------------------------------------------------------------- */
+/* --- RESPONSIVENESS (Mobile View) --- */
+/* --------------------------------------------------------------------- */
+
+@media (max-width: 900px) {
+    .dashboard-container {
+        /* On small screens, stack the sidebar and main content */
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        /* Make sidebar horizontal (top bar) on small screens */
+        padding: 15px 0;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid #4a627c;
+        display: block; /* ensure it's visible */
+    }
+
+    .sidebar .logo {
+        display: none; /* Hide logo to save space */
+    }
+
+    .sidebar-nav ul {
+        display: flex;
+        justify-content: space-around; /* Distribute items across the top bar */
+        gap: 5px;
+    }
+    
+    .sidebar-nav ul li a {
+        flex-direction: column; /* Stack icon and text */
+        text-align: center;
+        padding: 8px 5px;
+        font-size: 0.8em;
+    }
+    
+    .sidebar-nav ul li a i {
+        margin-right: 0;
+        margin-bottom: 3px;
+    }
+
+    /* Content grid adjustments for mobile */
+    .content-grid {
+        /* Stack summary cards in 2 columns */
+        grid-template-columns: repeat(2, 1fr); 
+    }
+
+    /* Ensure larger cards still span correctly in the new 2-column grid */
+    .full-width {
+        grid-column: 1 / -1; 
+    }
+}
+
+@media (max-width: 500px) {
+    .content-grid {
+        /* Stack all summary cards in 1 column on very small screens */
+        grid-template-columns: 1fr;
+    }
+}
