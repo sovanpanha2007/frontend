@@ -1,0 +1,127 @@
+## Highlight the input field when it is focused 
+<form>
+    <input type="text" class="challenge-input" placeholder="Click or Tab here">
+</form>
+
+<style>
+.challenge-input {
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.challenge-input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+</style>
+
+##Change the button background color on hover 
+<button class="hover-button">Hover Over Me</button>
+<style>
+.hover-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.hover-button:hover {
+    background-color: #0056b3;
+}
+</style>
+
+##Create a search bar with rounded corners and a shadow effect
+<input type="search" class="search-bar" placeholder="Search...">
+<style>
+.search-bar {
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 250px;
+    font-size: 16px;
+}
+</style>
+##Display a different style when the checkbox is checked 
+<input type="checkbox" id="my-checkbox">
+<label for="my-checkbox" class="styled-label">Checked Status</label>
+<style>
+#my-checkbox {
+    display: none;
+}
+
+.styled-label {
+    padding: 5px 10px;
+    border: 2px solid #ccc;
+    display: inline-block;
+    cursor: pointer;
+    background-color: #f0f0f0;
+    transition: background-color 0.3s;
+}
+
+#my-checkbox:checked + .styled-label {
+    background-color: #4CAF50;
+    color: white;
+    border-color: #4CAF50;
+}
+</style>
+##Style a checkbox to have three states
+<input type="checkbox" id="three-state-checkbox" class="three-state">
+<label for="three-state-checkbox"></label>
+
+<script>
+document.getElementById('three-state-checkbox').indeterminate = true;
+</script>
+
+<style>
+.three-state {
+    appearance: none;
+    -webkit-appearance: none;
+    margin: 0;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #aaa;
+    cursor: pointer;
+    position: relative;
+}
+
+.three-state:after {
+    content: '';
+}
+
+.three-state:checked {
+    background-color: #4CAF50;
+    border-color: #4CAF50;
+} 
+
+.three-state:checked:after {
+    content: '✓';
+    font-size: 14px;
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+} 
+
+.three-state:indeterminate {
+    background-color: #ff9800;
+    border-color: #ff9800;
+} 
+
+.three-state:indeterminate:after {
+    content: '—';
+    font-size: 16px;
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+</style>
