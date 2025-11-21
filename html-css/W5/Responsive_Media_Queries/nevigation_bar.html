@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive_Nevigation_bar</title>
+    <style>
+        .flex-container {
+            display: flex;  
+            justify-content: space-between;
+            align-items: center;
+            background-color: #333;
+            padding: 10px;
+        }
+        .nav-links a {
+            color: white;
+            padding: 5px 10px;
+            text-decoration: none;
+            text-align: center;
+        }
+        .logo{
+            color:white;
+            font-size:24px;
+            font-weight:bold;
+        }
+        @media(max-width:768px){
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="flex-container">
+        <div class="logo">Logo</div>
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Services</a>
+            <a href="#">Contact</a>
+        </div>
+    </div>
+</body>
+</html>

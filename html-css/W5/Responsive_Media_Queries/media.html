@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimal Responsive Demo</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Clamp Configuration: min(300px), preferred(90vw), max(800px) */
+        .clamp-box {
+            width: clamp(300px, 90vw, 800px);
+            min-height: 100px;
+            margin: 20px auto; /* Center the box */
+        }
+        
+        /* Base styles for the media query demo blocks */
+        .media-demo-content {
+            padding: 24px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body class="p-4 bg-gray-100">
+
+    <div class="max-w-4xl mx-auto">
+        <!-- 1. Media Query Demonstration (Small vs. Big) -->
+        <!-- Shows when screen is smaller than 640px -->
+        <div class="sm:hidden media-demo-content bg-red-600 text-white">
+            I'm SMALL 🤏
+        </div>
+        <!-- Shows when screen is 640px or larger -->
+        <div class="hidden sm:block media-demo-content bg-green-500 text-white">
+            I'm BIG 🤩
+        </div>
+
+        <!-- 2. CSS Clamp() Property Demonstration -->
+        <div class="clamp-box bg-yellow-400 p-8 flex items-center justify-center rounded-xl shadow-lg">
+            <p class="text-gray-800 text-center font-mono">
+                Clamp Width: <code class="text-teal-700">clamp(300px, 90vw, 800px)</code>
+            </p>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flexbox Layout</title>
+    <style>
+        .Responsive_Header, .Footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-size: 24px;
+        }
+        .content {
+            gap: 10px;
+            padding: 10px;
+        }
+        .main {
+            background-color: lightblue;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        .sidebar {
+            background-color: lightgreen;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        @media (min-width: 600px) {
+            .content {
+                display: flex;
+                flex-direction: row;
+                gap: 10px;
+            }
+            .main {
+                flex: 3;
+                margin: 10px 0;
+            }
+            .sidebar {
+                flex: 1;
+                margin: 10px 0;
+            }   
+            .Footer, .Responsive_Header {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="Responsive_Header">Responsive_Header</div>
+    <div class="content">
+        <div class="main">Main Content</div>
+        <div class="sidebar">Sidebar</div>
+    </div>
+    <div class="Footer">Footer</div>
+</body>
+</html>
