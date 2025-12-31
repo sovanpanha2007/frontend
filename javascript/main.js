@@ -80,7 +80,7 @@ try {
 } catch (e) {
   console.log("JSON error: " + e);
 }
- *//* 
+ */ /*
 
 const cars = ["BWM", "TOYOTA", "HONDA"];
 console.log(cars.map((car) => car.length));
@@ -104,7 +104,6 @@ const bob2 = (a) => a + 100; */
 
 // console.log(myfucntion(19));
 
-
 // function myFunction(...Arr) { // Rest parameter
 //   let total =0;
 //   for (const arr of Arr){
@@ -122,13 +121,130 @@ const bob2 = (a) => a + 100; */
 // }
 // console.log(a);\
 
-function myName(){
-  return console.log("My name is panha. ");
-}
+// function myName(){
+// //   return console.log("My name is panha. ");
+// // }
 
-function myNickname() {
-  myName();
-}
+// // function myNickname() {
+// //   myName();
+// // }
 
-myName();
-myNickname();
+// // myName();
+// // myNickname();
+// // setTimeout(function, par1,par2,)
+// setTimeout(() => console.log("Task1"), 3000);
+// console.log("Task2");
+// //
+// console.log("Task3");
+// //
+
+// function namePeople() {
+//   let namePerson = "john";
+//   console.log(`Hello ${namePerson}`);
+// }
+
+// const myInterval = setInterval(namePeople, 200);
+
+// setTimeout(() => {
+//   clearInterval(myInterval);
+//   console.log("cleared..");
+// }, 1000);
+
+// function calculationArr(array){
+//   let sum =0;
+//   for (let i=0; i < array.length; i++){
+//     sum += array[i];
+//   }
+//   return sum;
+// }
+// let array = [1,2,3];
+// console.log(calculationArr(array));
+
+// function drawStar(w, h){
+//   for(let i = w;i>0;i--){
+//     for(let j=h;j>0;j--){
+//         process.stdout.write("*");
+//     }
+//     console.log("");
+//   }
+// }
+// drawStar(3,4);
+
+// function reversedArray(array) {
+//   const result =[];
+//   while (array.length >0){
+//     const current = array.pop();
+//     result.push(current);
+//   }
+//   return result;
+// }
+
+// console.log(reversedArray([5,4,3,2,1,0]));
+
+// function averageGrade(array){
+//   let sum = 0;
+//   for (let i =0;i <array.length;i++){
+//       sum += array[i];
+//   }
+//   return sum/ array.length;
+// }
+
+// console.log(averageGrade([1,2,3]));
+
+// function countLetter(string, char){
+//     let count =0;
+//     for (let i = 0; i < string.length; i++){
+//         if (string[i] == char) {
+//             count ++;
+//         }
+//     }
+//     return count;
+// }
+
+// console.log(countLetter("BABABA", "A"));
+
+// function countWord(string){
+//     let count =0;
+//     currentWord = string.split(" ");
+//     for (let i =0;i < currentWord.length;i++){
+//         if (currentWord[i] !== ""){
+//             count++;
+//         }
+//     }
+//     return count;
+// }
+
+// console.log(countWord("hi what is my name"));
+
+// function countVote(array){
+//   if (array.length == 0){
+//     return [];
+//   }
+//   let count = [0, 0, 0];
+//   for (let i =0; i < array.length;i++){
+//       if (array[i] == 'A') {
+//         count[0]++;
+//       } else if (array[i] == 'B'){
+//               count[1]++;
+//       } else {
+//             count[2]++;
+//       }
+//   }
+//   //find the max value
+//   let max = Math.max(...count);
+//   let winners = [];
+//   for (let i =0; i < count.length;i++){
+//       if (count[i] === max){
+//           winners.push(i);
+//       }
+//   }
+//   return winners;
+// }
+// const candidates = ['A','B','C'];
+// const result = countVote(['A','B','B']);
+// if (result.length === 0){
+//     console.log("There is no vote yet");
+// } else {
+//     const winnerNames = result.map(i => candidates[i]).join(' and ');
+//     console.log(`${winnerNames} ${result.length > 1 ? 'are' : 'is'} the winner${result.length > 1 ? 's' : ''}`)
+// }
