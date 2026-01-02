@@ -13,10 +13,10 @@ const server = http.createServer((req, res) => {
             res.writeHead(500,{'Content-Type': 'text/plain'});
             return res.end('Error loading HTML file');
         }
-
+        
         //RUN
-    res.writeHead(200, {'Content-Type': 'text/html'});
-    res.end(data); // signal that repsonse (header&body) has been sent(Must call on each respone)
+        res.writeHead(200, {'Content-Type': 'text/html'});
+        res.end(data); // signal that repsonse (header&body) has been sent(Must call on each respone)
     })
 })
 
