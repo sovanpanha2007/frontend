@@ -1,0 +1,33 @@
+### TEST GET / WESITE
+GET http://localhost:3000/
+
+
+### TEST GET /dashboard WEBSITE
+GET http://localhost:3000/dashboard
+
+### TEST POST /login WEBSITE
+POST http://localhost:3000/api/data
+Content-Type: application/json
+
+{
+    "name": "John"
+}
+### TEST POST /api/data WEBSITE
+POST http://localhost:3000/api/data
+Content-Type: application/json
+
+{
+    "name": "Josh"
+}
+
+### TEST DELETE /api/data WEBSITE
+DELETE http://localhost:3000/api/data
+
+### TEST PUT /api/data WEBSITE
+PUT http://localhost:3000/api/data
+Content-Type: application/json
+
+{   
+    "index": 1,
+    "name": "Doe"
+}
