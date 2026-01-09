@@ -185,8 +185,7 @@
             isAuthenticating ||
             !emailVal ||
             !passVal ||
-            passVal.length < 6 ||
-            !emailVal.includes('@')
+            passVal.length < 6
         ) { return }
 
         // reset error and set isAuthenticating to true
