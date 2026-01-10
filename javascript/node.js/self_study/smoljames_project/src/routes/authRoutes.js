@@ -1,12 +1,11 @@
 import express from 'express'
 import bcrypt from  'bcryptjs'
 import jwt from 'jsonwebtoken'
-import db from '../db.js'
 
 const router = express.Router();
 
 // register a new user endpoint  auth/register
-router.post('/register', (req,res)=> {
+router.post('/register', async (req,res)=> {
     const {username, password} = req.body;
     // save the username and irreversibly encrypted password
     // save (hfahfhfhafhahgmail.com) and | akkdhfddjhffd.fhdhd.weew.df
@@ -19,13 +18,22 @@ router.post('/register', (req,res)=> {
         // Insert a user to the database
         // First tell what entities to insert with blank value
         // "run" to insert value
-        const insertUser = db.prepare(`INSERT INTO users (username, password) VALUES (?, ?)`);
-        const result = insertUser.run(username, hashedPassword);
+        const user = await prisma.user.create({
+            data: {
+                username,
+                password: hashedPassword
+            }
+        })
+
 
         // add default todo for user
-        const defaultTodo = `Hello! Add your first todo!`
-        const insertTodo = db.prepare(`INSERT INTO todos (user_id, task) VALUES (?, ?)`)
-        insertTodo.run(result.lastInsertRowid, defaultTodo);
+        const defaultTodo = `Hello :) Add your first todo!`
+        await prisma.todo.create({
+            data: {
+                task: defaultTodo,
+                userId: user.id
+            }
+        })
 
         // create a token
         const token = jwt.sign({id: result.lastInsertRowid}, process.env.JWT_SECRET, {expiresIn: '24h'})
@@ -38,7 +46,7 @@ router.post('/register', (req,res)=> {
     console.log(hashedPassword);
 })
 
-router.post('/login', (req,res)=> {
+router.post('/login', async (req,res)=> {
     // we get the user email and we look up the password assoicated with that 
     // email in the database
     // but we get it back and see it's encrypted, which mean that we cannot
@@ -48,11 +56,11 @@ router.post('/login', (req,res)=> {
     const {username, password} = req.body;
 
     try {
-        // if we cannot find a user associated wiht the username, return out
-        // from the function
-        const getUser = db.prepare('SELECT * FROM users WHERE username =?')
-        // inject the username into the ? above, in order to find in the database 
-        const user = getUser.get(username)
+        const user = await prisma.user.findUnique({
+            where: {
+                username: username
+            }
+        })
         if(!user) {
             return res.status(404).send({message: "User not found"})
         }
