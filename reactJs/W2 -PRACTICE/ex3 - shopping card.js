@@ -23,7 +23,8 @@ function getCartTotalAmount() {
   // Write your code here
 SHOPPING_CART.forEach(element=>{
       index=element.id
-      result+=(PRODUCTS[index-1].price * element.quantity)
+      itemPrice = PRODUCTS.find(e => e.id == index).price
+      result+=(itemPrice * element.quantity)
 })
    
   return result;
