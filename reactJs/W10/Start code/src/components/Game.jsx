@@ -41,6 +41,7 @@ function Game() {
   const [monsterHealth, setMonsterHealth] = useState(100);
   const [logMessages, setLogMessages] = useState([]);
   const [isGameActive, setIsGameActive] = useState(true);
+  const [count, setCount] = useState(0);
   // ----------------------------------------------------------------------------------------------------------
   // BUTTONS EVENT FUNCTIONS
   // ----------------------------------------------------------------------------------------------------------
@@ -48,39 +49,100 @@ function Game() {
     if (!isGameActive) {
       return;
     }
-    setMonsterHealth(monsterHealth - getRandomValue(5,12))
-    setPlayerHealth(playerHealth - getRandomValue(5,25))
+    const monsterDamageTaken = getRandomValue(5, 12);
+    const playerDamageTaken = getRandomValue(5, 25);
+
+    setMonsterHealth(prevMonsterHealth => prevMonsterHealth - monsterDamageTaken)
+    setPlayerHealth(prevPlayerHealth => prevPlayerHealth - playerDamageTaken)
+    setCount(prev => prev + 1);
+
+    setLogMessages(prevLogs => [
+      createLogAttack(true, playerDamageTaken),
+      createLogAttack(false, monsterDamageTaken),
+      ...prevLogs
+    ]);
+    setZero()
   }
 
   function healHandler() {
+    const healingtaken = getRandomValue(8, 15)
+    if (!isGameActive || playerHealth === 100) {
+      return
+    }
+    setPlayerHealth(prevPlayerHealth => prevPlayerHealth + healingtaken)
+    setLogMessages(prevLogs => {
+      return [
+        createLogHeal(healingtaken),
+        ...prevLogs
+      ]
+    })
+  }
+  function specialAttackHandler() {
     if (!isGameActive) {
       return
     }
-    setPlayerHealth(playerHealth + getRandomValue(8,15))
+    const monsterDamageTaken = getRandomValue(8, 25);
+    const playerDamageTaken = getRandomValue(8, 25);
+    setMonsterHealth(prevMonsterHealth => prevMonsterHealth - monsterDamageTaken)
+    setPlayerHealth(prevPlayerHealth => prevPlayerHealth - playerDamageTaken)
+    setCount(0);
+
+    setLogMessages(prevLogs => [
+      createLogAttack(true, playerDamageTaken),
+      createLogAttack(false, monsterDamageTaken),
+      ...prevLogs
+    ]);
+    setZero()
+  }
+  function surrenderHandler() {
+    if (!isGameActive) {
+      return
+    }
+    setPlayerHealth(0)
+    setIsGameActive(false)
   }
   // ----------------------------------------------------------------------------------------------------------
   // JSX FUNCTIONS
   // ----------------------------------------------------------------------------------------------------------
+  // Set health to 0
+  function setZero() {
+    if (playerHealth <= 0) {
+      setPlayerHealth(0)
+    }
+    if (monsterHealth <= 0) {
+      setMonsterHealth(0)
+    }
+  }
+  function restartGame() {
+    setPlayerHealth(100)
+    setMonsterHealth(100)
+    setLogMessages([])
+    setIsGameActive(true)
+    setCount(0)
+  }
   // ----------------------------------------------------------------------------------------------------------
   // MAIN  TEMPLATE
   // ----------------------------------------------------------------------------------------------------------
   return (
-  <>
-  <Entity name="Your Health" health={100}></Entity>
-  <Entity name="Monster Health" health={100}></Entity>
-  <section id="controls">
-    <button>ATTACK</button>
-    <button>SPECIAL !</button>
-    <button>HEAL</button>
-    <button>KILL YOURSELF</button>
-  </section>
-  //<GameOver title="You Win!" restartGame={() => {}}></GameOver>
-  <section id="log" className="container">
-    <h2>Battle Log</h2>
-    <Log logMessage={createLogAttack(true, 10)}/>
-    <Log logMessage={createLogHeal(10)}/>
-  </section>
-  </>
+    <>
+      <Entity name="Your Health" health={playerHealth}></Entity>
+      <Entity name="Monster Health" health={monsterHealth}></Entity>
+      {isGameActive &&
+        <section id="controls">
+          <button onClick={attackHandler}>ATTACK</button>
+          <button disabled={count < 3} onClick={specialAttackHandler}>SPECIAL !</button>
+          <button onClick={healHandler}>HEAL</button>
+          <button onClick={surrenderHandler}>KILL YOURSELF</button>
+        </section>
+      }
+      {!isGameActive && <GameOver title={playerHealth <= 0 ? "You Lose!" : "You Win!"} restartGame={restartGame()}></GameOver>}
+      <section id="log" className="container">
+        <h2>Battle Log</h2>
+        {logMessages.map((msg, index) => (
+          <Log key={index} logMessage={msg} />
+        ))}
+      </section>
+    </>
   );
 }
 
