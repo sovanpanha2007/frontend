@@ -52,8 +52,8 @@ function Game() {
     const monsterDamageTaken = getRandomValue(5, 12);
     const playerDamageTaken = getRandomValue(5, 25);
 
-    setMonsterHealth(prevMonsterHealth => prevMonsterHealth - monsterDamageTaken)
-    setPlayerHealth(prevPlayerHealth => prevPlayerHealth - playerDamageTaken)
+    setMonsterHealth(prevMonsterHealth => Math.max(0, prevMonsterHealth - monsterDamageTaken))
+    setPlayerHealth(prevPlayerHealth => Math.max(0, prevPlayerHealth - playerDamageTaken))
     setCount(prev => prev + 1);
 
     setLogMessages(prevLogs => [
@@ -61,7 +61,6 @@ function Game() {
       createLogAttack(false, monsterDamageTaken),
       ...prevLogs
     ]);
-    setZero()
   }
 
   function healHandler() {
@@ -69,7 +68,7 @@ function Game() {
     if (!isGameActive || playerHealth === 100) {
       return
     }
-    setPlayerHealth(prevPlayerHealth => prevPlayerHealth + healingtaken)
+    setPlayerHealth(prevPlayerHealth => Math.min(100, prevPlayerHealth + healingtaken))
     setLogMessages(prevLogs => {
       return [
         createLogHeal(healingtaken),
@@ -83,8 +82,8 @@ function Game() {
     }
     const monsterDamageTaken = getRandomValue(8, 25);
     const playerDamageTaken = getRandomValue(8, 25);
-    setMonsterHealth(prevMonsterHealth => prevMonsterHealth - monsterDamageTaken)
-    setPlayerHealth(prevPlayerHealth => prevPlayerHealth - playerDamageTaken)
+    setMonsterHealth(prevMonsterHealth => Math.max(0, prevMonsterHealth - monsterDamageTaken))
+    setPlayerHealth(prevPlayerHealth => Math.max(0, prevPlayerHealth - playerDamageTaken))
     setCount(0);
 
     setLogMessages(prevLogs => [
@@ -92,7 +91,6 @@ function Game() {
       createLogAttack(false, monsterDamageTaken),
       ...prevLogs
     ]);
-    setZero()
   }
   function surrenderHandler() {
     if (!isGameActive) {
@@ -104,15 +102,6 @@ function Game() {
   // ----------------------------------------------------------------------------------------------------------
   // JSX FUNCTIONS
   // ----------------------------------------------------------------------------------------------------------
-  // Set health to 0
-  function setZero() {
-    if (playerHealth <= 0) {
-      setPlayerHealth(0)
-    }
-    if (monsterHealth <= 0) {
-      setMonsterHealth(0)
-    }
-  }
   function restartGame() {
     setPlayerHealth(100)
     setMonsterHealth(100)
@@ -127,7 +116,7 @@ function Game() {
     <>
       <Entity name="Your Health" health={playerHealth}></Entity>
       <Entity name="Monster Health" health={monsterHealth}></Entity>
-      {isGameActive &&
+      {isGameActive && playerHealth > 0 && monsterHealth > 0 &&
         <section id="controls">
           <button onClick={attackHandler}>ATTACK</button>
           <button disabled={count < 3} onClick={specialAttackHandler}>SPECIAL !</button>
@@ -135,7 +124,7 @@ function Game() {
           <button onClick={surrenderHandler}>KILL YOURSELF</button>
         </section>
       }
-      {!isGameActive && <GameOver title={playerHealth <= 0 ? "You Lose!" : "You Win!"} restartGame={restartGame()}></GameOver>}
+      {(!isGameActive || playerHealth <= 0 || monsterHealth <= 0) && <GameOver title={playerHealth <= 0 ? "You Lose!" : "You Win!"} restartGame={restartGame}></GameOver>}
       <section id="log" className="container">
         <h2>Battle Log</h2>
         {logMessages.map((msg, index) => (
